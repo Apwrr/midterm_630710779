@@ -1,56 +1,21 @@
+
 import'package:midterm_630710779/game.dart';
 import 'package:flutter/material.dart';
 
-class GamePage extends StatefulWidget {
+class Temperature extends StatefulWidget {
   @override
-  State<GamePage> createState() => _GamePageState();
+  State<Temperature> createState() => _TemperatureState();
 }
 
-class _GamePageState extends State<GamePage> {
+class _TemperatureState extends State<Temperature> {
   final Mycontroller = TextEditingController();
-  final MyGame = Game();
-  var feedback = '';
-  var showButton = false;
   var textOutput = '';
   var outputButton = false;
 
-  void handleClick() {
-    setState(() {
-      showButton = ! showButton;
-    });
-    print('Click');
-    print(Mycontroller.text);
-    var guess = int.tryParse((Mycontroller.text));
 
-    if(guess == null){
-      //error
-      setState(() {
-        feedback = 'Input error, please try again';
-      });
-      print('Input error');
-
-    } else{
-      var result = MyGame.doGuess(guess);
-      if(result == Result.tooHigh){
-        print('Too high');
-        setState(() {
-          feedback = 'Too high, please try again!!!';
-        });
-      } else if(result == Result.tooLow){
-        print('Too Low');
-        setState(() {
-          feedback = 'Too Low, please try again!!!';
-        });
-      } else{
-        print('correct');
-        setState(() {
-          feedback = 'Good job!';
-        });
-      }
-    }
-  }
-  void calulateOnClick(){
-    var input = int.tryParse((Mycontroller.text));
+  void FahrenheitToCelsius(){
+    var input = double.tryParse((Mycontroller.text));
+    double temp1;
     print(input);
     if(input == null){
       //error
@@ -59,32 +24,136 @@ class _GamePageState extends State<GamePage> {
       });
       print('Input error');
     } else{
-      if(input % 2 == 0){
+      temp1 = (input - 32) * 5/9;
         setState(() {
-          textOutput = '$input is even';
+          textOutput = '$input Fahrenheit = $temp1 Celsius ';
           outputButton = true;
         });
-      } else{
-        setState(() {
-          textOutput = '$input is odd';
-          outputButton = false;
-        });
-      }
-
+    }
+  }
+  void CelsiusToFahrenheit(){
+    var input = double.tryParse((Mycontroller.text));
+    double temp1;
+    print(input);
+    if(input == null){
+      //error
+      setState(() {
+        textOutput = 'Input error, please try again';
+      });
+      print('Input error');
+    } else{
+      temp1 = (input - 32) * 5/9;
+      setState(() {
+        textOutput = '$input Celsius = $temp1 Fahrenheit ';
+        outputButton = true;
+      });
+    }
+  }
+  void CelsiusTokelvin(){
+    var input = double.tryParse((Mycontroller.text));
+    double temp1;
+    print(input);
+    if(input == null){
+      //error
+      setState(() {
+        textOutput = 'Input error, please try again';
+      });
+      print('Input error');
+    } else{
+      temp1 = input - 273.15;
+      setState(() {
+        textOutput = '$input Celsius = $temp1 kelvin ';
+        outputButton = true;
+      });
+    }
+  }
+  void kelvinToCelsius(){
+    var input = double.tryParse((Mycontroller.text));
+    double temp1;
+    print(input);
+    if(input == null){
+      //error
+      setState(() {
+        textOutput = 'Input error, please try again';
+      });
+      print('Input error');
+    } else{
+      temp1 = input - 273.15;
+      setState(() {
+        textOutput = '$input kelvin = $temp1 Celsius ';
+        outputButton = true;
+      });
     }
   }
 
+  void FahrenheitToKelvin(){
+    var input = double.tryParse((Mycontroller.text));
+    double temp1;
+    print(input);
+    if(input == null){
+      //error
+      setState(() {
+        textOutput = 'Input error, please try again';
+      });
+      print('Input error');
+    } else{
+      temp1 = (input - 273.15) * 9/5 + 32;
+      setState(() {
+        textOutput = '$input Fahrenheit = $temp1 Kelvin ';
+        outputButton = true;
+      });
+    }
+  }
+
+  void KelvinToFahrenheit(){
+    var input = double.tryParse((Mycontroller.text));
+    double temp1;
+    print(input);
+    if(input == null){
+      //error
+      setState(() {
+        textOutput = 'Input error, please try again';
+      });
+      print('Input error');
+    } else{
+      temp1 = (input - 273.15) * 9/5 + 32;
+      setState(() {
+        textOutput = '$input Kelvin = $temp1 Fahrenheit ';
+        outputButton = true;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Guess The Number')),
+      appBar: AppBar(title: const Text('Midterm Exam')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         /*decoration: BoxDecoration(
         border: Border.all(color: Colors.green)
       ),*/
         children: [
-          const Text('Please enter number between 1 and 100'),
+          Container(
+              padding: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+              color: Colors.white38,
+              borderRadius: BorderRadius.circular(8.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+
+            ),
+              child:
+              const Text('Temperature Converter',
+                style: TextStyle(fontSize: 30),),
+          ),
+
           TextField(
             controller: Mycontroller,
             decoration: const InputDecoration(
@@ -92,23 +161,64 @@ class _GamePageState extends State<GamePage> {
               hintText: 'Enter a number',
             ),
           ),
-          //Callback
-          ElevatedButton(
-            onPressed: handleClick,
-            child: Text('GUESS'),
-          ),
-          Text(feedback),
+          SizedBox(height: 10.0),
 
           ElevatedButton(
             style: OutlinedButton.styleFrom(
-              backgroundColor: showButton ? Colors.green : Colors.red,
+              backgroundColor: Colors.blueGrey,
             ),
-            onPressed: calulateOnClick,
-            child: const Text('TEST'),
+            onPressed: FahrenheitToCelsius,
+            child: const Text('Fahrenheit To Celsius'),
           ),
           //Icon(showButton ? Icons.print : Icons.access_time_rounded),
+          SizedBox(width: 30.0, height: 10.0),
+
+          ElevatedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Colors.blueGrey,
+            ),
+            onPressed: CelsiusToFahrenheit,
+            child: const Text('Celsius To Fahrenheit'),
+          ),
+          SizedBox(width: 30.0, height: 10.0),
+
+          ElevatedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Colors.blueGrey,
+            ),
+            onPressed: CelsiusTokelvin,
+            child: const Text('Celsius To kelvin'),
+          ),
+          SizedBox(width: 30.0, height: 10.0),
+
+          ElevatedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Colors.blueGrey,
+            ),
+            onPressed: kelvinToCelsius,
+            child: const Text('kelvin To Celsius'),
+          ),
+          SizedBox(width: 30.0, height: 10.0),
+
+          ElevatedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Colors.blueGrey,
+            ),
+            onPressed: FahrenheitToKelvin,
+            child: const Text('Fahrenheit To Kelvin'),
+          ),
+          SizedBox(width: 30.0, height: 10.0),
+
+          ElevatedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Colors.blueGrey,
+            ),
+            onPressed: KelvinToFahrenheit,
+            child: const Text('Kelvin To Fahrenheit'),
+          ),
+          SizedBox(height: 10.0),
+
           Text(textOutput),
-          Icon(outputButton ? Icons.add : Icons.accessibility ,color: Colors.green),
         ],
       ),
     );
