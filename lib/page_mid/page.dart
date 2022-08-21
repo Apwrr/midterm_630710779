@@ -1,5 +1,4 @@
 
-import'package:midterm_630710779/game.dart';
 import 'package:flutter/material.dart';
 
 class Temperature extends StatefulWidget {
