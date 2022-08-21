@@ -42,7 +42,7 @@ class _TemperatureState extends State<Temperature> {
       });
       print('Input error');
     } else{
-      temp1 = (input - 32) * 5/9;
+      temp1 = (input *1.8)+32;
       setState(() {
         textOutput = '$input Celsius = $temp1 Fahrenheit ';
         outputButton = true;
@@ -60,7 +60,7 @@ class _TemperatureState extends State<Temperature> {
       });
       print('Input error');
     } else{
-      temp1 = input - 273.15;
+      temp1 = input + 273.15;
       setState(() {
         textOutput = '$input Celsius = $temp1 kelvin ';
         outputButton = true;
@@ -97,7 +97,7 @@ class _TemperatureState extends State<Temperature> {
       });
       print('Input error');
     } else{
-      temp1 = (input - 273.15) * 9/5 + 32;
+      temp1 = (input + 459.67) * 5/9;
       setState(() {
         textOutput = '$input Fahrenheit = $temp1 Kelvin ';
         outputButton = true;
