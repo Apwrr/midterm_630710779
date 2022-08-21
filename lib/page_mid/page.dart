@@ -218,7 +218,7 @@ class _TemperatureState extends State<Temperature> {
           ),
           SizedBox(height: 10.0),
 
-          Text(textOutput),
+          Text(textOutput,style: TextStyle(fontSize: 20)),
         ],
       ),
     );
