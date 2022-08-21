@@ -22,7 +22,6 @@ class _TemperatureState extends State<Temperature> {
       setState(() {
         textOutput = 'Input error, please try again';
       });
-      print('Input error');
     } else{
       temp1 = (input - 32) * 5/9;
         setState(() {
@@ -40,7 +39,6 @@ class _TemperatureState extends State<Temperature> {
       setState(() {
         textOutput = 'Input error, please try again';
       });
-      print('Input error');
     } else{
       temp1 = (input *1.8)+32;
       setState(() {
@@ -58,7 +56,6 @@ class _TemperatureState extends State<Temperature> {
       setState(() {
         textOutput = 'Input error, please try again';
       });
-      print('Input error');
     } else{
       temp1 = input + 273.15;
       setState(() {
@@ -76,7 +73,6 @@ class _TemperatureState extends State<Temperature> {
       setState(() {
         textOutput = 'Input error, please try again';
       });
-      print('Input error');
     } else{
       temp1 = input - 273.15;
       setState(() {
@@ -95,7 +91,6 @@ class _TemperatureState extends State<Temperature> {
       setState(() {
         textOutput = 'Input error, please try again';
       });
-      print('Input error');
     } else{
       temp1 = (input + 459.67) * 5/9;
       setState(() {
@@ -114,7 +109,6 @@ class _TemperatureState extends State<Temperature> {
       setState(() {
         textOutput = 'Input error, please try again';
       });
-      print('Input error');
     } else{
       temp1 = (input - 273.15) * 9/5 + 32;
       setState(() {
@@ -158,7 +152,7 @@ class _TemperatureState extends State<Temperature> {
             controller: Mycontroller,
             decoration: const InputDecoration(
               border: UnderlineInputBorder(),
-              hintText: 'Enter a number',
+              hintText: 'Enter a Temperature value to convert',
             ),
           ),
           SizedBox(height: 10.0),
